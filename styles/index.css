@@ -507,11 +507,18 @@ body{
         row-gap: 40px;
         padding-bottom: 50px;
     }
+    .head-txt{
+        width: 80vw;
+    }
     .under{
         max-width: 90vw;
     }
     .hero-bg{
         row-gap: 1rem;
+        width: 90vw;
+    }
+    .floating-shapes{
+        display: none;
     }
     .div1, .div2, .div3, .div4 {
         margin: 0;
