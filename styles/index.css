@@ -1,0 +1,558 @@
+body{
+    margin: 0;
+    
+}
+
+.glass-navbar {
+  /* 1. Positioning & Layout */
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  border-radius: 20px;
+  z-index: 1000;
+
+  /* 2. The Glass Effect */
+  background: rgba(255, 255, 255, 0.1); /* Very transparent white */
+  backdrop-filter: blur(15px); /* This creates the "frosted" look */
+  -webkit-backdrop-filter: blur(15px); /* Safari support */
+
+  /* 3. Edges & Depth */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Thin light border */
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),            /* Outer soft shadow */
+    inset 0 0 15px rgba(255, 255, 255, 0.05); /* Subtle inner vertex glow */
+}
+
+/* Link Styling */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.7;
+  filter: brightness(1.2); /* Using the filter we discussed! */
+}
+.glass-navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  border-radius: 20px;
+  z-index: 900;
+
+  /* Initial state: Clean Glass */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  
+  /* Smooth transition for all properties */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Link Styling */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #000;
+  opacity: 1;
+}
+
+/* The Glass State (Triggered by JS) */
+.glass-navbar.scrolled {
+  top: 10px;
+  padding: 12px 40px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.hero{
+    align-items: center;
+    background-color: var(--bg-color);
+    display: grid;
+    padding-top: 4.5rem;
+    grid-template-areas: "stack";
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+.hero-bg{
+    display: grid;
+    row-gap: 70px;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 50% 50%;
+    
+}
+.card-link{
+    width: fit-content;
+    height: fit-content  ;
+    justify-content: center;
+}
+.header{
+    position: absolute;
+    justify-self: center;
+    align-self: center;
+    z-index: 9;
+    grid-area: "stack";
+    place-self: center;
+}
+.head-txt{
+    background-image: url(https://komuhost.vercel.app/img20.png);
+    height: 70px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 400px;
+    justify-self: center;
+    margin-bottom: 0px;
+
+}
+.under{
+    font-size: 1.1rem;
+    color: rgb(117, 67, 158);
+    font-family: google sans;
+    max-width: 600px;
+    text-align: center;
+    justify-self: center;
+}
+.bg-div{
+    height: 200px;
+    width: 355px;
+    border-radius: 16px;
+    background-color: antiquewhite;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate; /* Creates a new stacking context */
+}
+
+/* The Bubble Effect */
+.bg-div::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    width: 1000px; /* Large fixed size to cover corners */
+    height: 1000px;
+    background: rgba(33, 70, 255, 0.9); /* Dark overlay color */
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Start scaled down */
+    transition: transform 0.6s ease 0.4s; /* Smooth close with delay */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.bg-div:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); /* Snappy, premium open */
+}
+
+/* Fix: Keep bubble open when hovering the button */
+.bg-div:has(.arrow-circle:hover)::before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Hover Content (Text + Arrow) */
+.hover-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index: 14;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transition: all 0.4s ease 0.4s;
+    pointer-events: none;
+}
+
+.bg-div:hover .hover-content {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: all 0.4s ease 0.1s;
+}
+
+/* Fix: Keep content visible when hovering the button */
+.bg-div:has(.arrow-circle:hover) .hover-content {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: all 0.4s ease 0.1s;
+}
+
+.view-text {
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.arrow-circle {
+    width: 45px;
+    height: 45px;
+    background: white;
+    border-radius: 50%;
+    z-index: 999;
+    cursor: pointer;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1f2937;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: shake 3s ease-in-out infinite alternate;
+}
+.arrow-circle:hover{
+    width: 70px;
+    height: 45px;
+    border-radius: 12px;
+    animation-play-state: paused;
+}
+@keyframes shake{
+    0%{
+        transform: translateY(0) rotate(0deg);
+    }
+    100%{
+        transform: translateY(-5px) rotate(2deg);
+    }
+
+}
+
+.div1{
+    justify-self: left;
+    margin-left: 7rem;
+    background-image: url(https://komuhost.vercel.app/img19.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+/* Floating Interactive Elements */
+.floating-shapes {
+    grid-area: stack;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Allows clicks to pass through to background */
+    z-index: 2; /* Above background, below header */
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    filter: blur(50px);
+    pointer-events: auto; /* Enables hover interaction */
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.shape:hover {
+    opacity: 0.9;
+    filter: blur(30px); /* Sharpens slightly on hover */
+}
+
+.shape-1 {
+    top: -10%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(63,94,251,0.4) 0%, rgba(252,70,107,0) 70%);
+    animation: float-vertical 6s ease-in-out infinite;
+}
+
+.shape-2 {
+    bottom: 10%;
+    right: -5%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(238,174,202,0.5) 0%, rgba(148,187,233,0) 70%);
+    animation: float-vertical 8s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+    top: 40%;
+    left: 45%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(58,180,160,0.4) 0%, rgba(29,253,29,0) 70%);
+    animation: float-vertical 7s ease-in-out infinite 1s;
+}
+
+@keyframes float-vertical {
+    0%, 100% { margin-top: 0; }
+    50% { margin-top: -30px; }
+}
+.div2{
+    justify-self: left;
+    margin-left: 12rem;
+    background-image: url(https://komuhost.vercel.app/img21.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+.div3{
+    justify-self: right;
+    margin-right: 12rem;
+    background-image: url(https://komuhost.vercel.app/img22.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+.div4{
+    justify-self: right;
+    margin-right: 2rem;
+    background-image: url(https://komuhost.vercel.app/img23.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+:root {
+  --card-height: 80vh;
+  --bg-color:  background-color: rgb(248, 241, 241);
+  --card-margin: 10px; /* This creates the 'lapped' space at the top */
+}
+
+
+.stack-container {
+    padding-top: 5rem;
+  padding: 50px 5%;
+   background-color: var(--bg-color);
+}
+
+.stack-card {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--card-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  border-radius: 40px;
+  margin-bottom: 100px; /* Space between cards as they scroll */
+  padding: 40px;
+  color: white;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease ;
+}
+.stack-card img{
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+/* Specific Card Styling with 'Dopamine' Colors */
+.card-1 {
+  border: 50px solid orange;
+  top: calc(var(--card-margin) * 1);
+  z-index: 994;
+}
+
+.card-2 {
+  background-color: #000000;
+  border: 50px solid rgb(30, 93, 242);
+  top: calc(var(--card-margin) * 2);
+  z-index: 996;
+}
+
+.card-3 {
+  background-color: #000000;
+  border: 50px solid rgb(255, 196, 0);
+  top: calc(var(--card-margin) * 3);
+  z-index: 997;
+}
+.card-4 {
+  background-color: #000000;
+  border: 50px solid rgb(227, 145, 52);
+  top: calc(var(--card-margin) * 3);
+  z-index: 997;
+}
+.card-5 {
+  background-color: #000000;
+  border: 50px solid rgb(203, 63, 231);
+  top: calc(var(--card-margin) * 3);
+  z-index: 997;
+}
+.card-content {
+  text-align: center;
+  max-width: 600px;
+}
+
+.card-content h2 {
+  font-size: 4rem;
+  font-family: 'Google Sans', sans-serif;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+.card-content p {
+  font-size: 1.5rem;
+  opacity: 0.9;
+}
+
+/* Vertices Shadow (Your signature style) */
+.stack-card {
+  box-shadow: 
+    0 20px 50px rgba(0,0,0,0.2);
+    transition: all 0.3s ease-in-out;
+}
+.stack-card:hover img{
+    filter: blur(10px);
+}
+.stack-card:hover .view-btn{
+   visibility: visible;
+   opacity: 1;
+   transform: translateY(0);
+}
+.view-btn {
+    padding: 15px 35px;
+    background: transparent;
+    visibility: hidden;
+    opacity: 0;
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 99;
+    font-weight: bold;
+    font-family: 'Google Sans', sans-serif;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.view-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    z-index: -2;
+}
+
+.view-btn::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    width: 400px;
+    height: 400px;
+    background: rgba(33, 70, 255, 0.9);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s ease 0.4s;
+    z-index: -1;
+}
+
+.view-btn:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.view-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    color: white;
+}
+
+/* Phone View / Responsive Design */
+@media (max-width: 768px) {
+    .hero-bg {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        row-gap: 40px;
+        padding-bottom: 50px;
+    }
+    .under{
+        max-width: 90vw;
+    }
+    .hero-bg{
+        row-gap: 1rem;
+    }
+    .div1, .div2, .div3, .div4 {
+        margin: 0;
+        justify-self: center;
+    }
+    .glass-navbar{
+       
+    }
+    .header{
+        position: relative;
+    }
+    .hero{
+        padding-top: 6rem;
+        min-height: 70vh;
+    }
+        .div2, .div3, .div4{
+        display: none;
+    }
+    .card-1, .card-2, .card-3, .card-4, .card-5 {
+        border-width: 20px;
+    }
+    .bg-div {
+        width: 90%;
+        max-width: 350px;
+    }
+
+    .glass-navbar {
+        width: 85%;
+         top: 0;
+        padding: 12px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .card-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .stack-card {
+        padding: 20px;
+        height: auto;
+        min-height: 60vh;
+    }
+}
