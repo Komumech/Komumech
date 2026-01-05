@@ -516,6 +516,7 @@ body{
     .div1, .div2, .div3, .div4 {
         margin: 0;
         justify-self: center;
+        width: 90vw;
     }
     .glass-navbar{
        
@@ -530,8 +531,20 @@ body{
         .div2, .div3, .div4{
         display: none;
     }
+    .stack-container{
+        padding-left: 0px;
+    }
     .card-1, .card-2, .card-3, .card-4, .card-5 {
-        border-width: 20px;
+        border-width: 0px;
+        height: 400px;
+        width: 90vw;
+    }
+    
+    .card-2{
+        background-color: blue;
+    }
+    .card-4{
+        background-color: rgb(241, 142, 50);
     }
     .bg-div {
         width: 90%;
@@ -553,6 +566,8 @@ body{
     .stack-card {
         padding: 20px;
         height: auto;
-        min-height: 60vh;
+    }
+    .stack-card img{
+        border-radius: 12px;
     }
 }
