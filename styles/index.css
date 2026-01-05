@@ -109,14 +109,24 @@ body{
     width: 100%;
     position: relative;
 }
+#hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    touch-action: pan-y;
+}
 .hero-bg{
-    filter: blur(0.2px);
-    opacity: 0.8;
-    display: grid;
-    row-gap: 70px;
-    grid-template-rows: 50% 50%;
-    grid-template-columns: 50% 50%;
-    
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 .card-link{
     width: fit-content;
@@ -130,6 +140,10 @@ body{
     z-index: 9;
     grid-area: "stack";
     place-self: center;
+    pointer-events: none;
+}
+.header > * {
+    pointer-events: auto;
 }
 .head-txt{
     background-image: url(https://komuhost.vercel.app/img20.png);
@@ -256,13 +270,28 @@ body{
 }
 
 .div1{
-    justify-self: left;
-    margin-left: 7rem;
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
     background-image: url(https://komuhost.vercel.app/img19.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
+    box-shadow: 
+        inset -25px -25px 40px rgba(0,0,0,0.6),
+        inset 10px 10px 20px rgba(255,255,255,0.5),
+        0 20px 50px rgba(0,0,0,0.4);
+    pointer-events: auto;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: float-ball 6s ease-in-out infinite;
+    z-index: 1;
+}
+.div1:hover {
+    transform: scale(1.15) translateY(-10px);
+    z-index: 10;
 }
 
 /* Floating Interactive Elements */
@@ -281,7 +310,7 @@ body{
     border-radius: 50%;
     opacity: 0.6;
     filter: blur(50px);
-    pointer-events: auto; /* Enables hover interaction */
+    pointer-events: none;
     transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
@@ -321,32 +350,74 @@ body{
     0%, 100% { margin-top: 0; }
     50% { margin-top: -30px; }
 }
+
+@keyframes float-ball {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-25px) rotate(3deg); }
+}
+
 .div2{
-    justify-self: left;
-    margin-left: 12rem;
+    position: absolute;
+    top: 20%;
+    right: 15%;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
     background-image: url(https://komuhost.vercel.app/img21.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
+    box-shadow: inset -25px -25px 40px rgba(0,0,0,0.6), inset 10px 10px 20px rgba(255,255,255,0.5), 0 20px 50px rgba(0,0,0,0.4);
+    pointer-events: auto;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: float-ball 7s ease-in-out infinite -2s;
+    z-index: 1;
+}
+.div2:hover {
+    transform: scale(1.15) translateY(-10px);
+    z-index: 10;
 }
 .div3{
-    justify-self: right;
-    margin-right: 12rem;
+    position: absolute;
+    bottom: 20%;
+    left: 20%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
     background-image: url(https://komuhost.vercel.app/img22.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
+    box-shadow: inset -25px -25px 40px rgba(0,0,0,0.6), inset 10px 10px 20px rgba(255,255,255,0.5), 0 20px 50px rgba(0,0,0,0.4);
+    pointer-events: auto;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: float-ball 8s ease-in-out infinite -4s;
+    z-index: 1;
+}
+.div3:hover {
+    transform: scale(1.15) translateY(-10px);
+    z-index: 10;
 }
 .div4{
-    justify-self: right;
-    margin-right: 2rem;
+    position: absolute;
+    bottom: 15%;
+    right: 10%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
     background-image: url(https://komuhost.vercel.app/img23.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
+    box-shadow: inset -25px -25px 40px rgba(0,0,0,0.6), inset 10px 10px 20px rgba(255,255,255,0.5), 0 20px 50px rgba(0,0,0,0.4);
+    pointer-events: auto;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: float-ball 6s ease-in-out infinite -1s;
+    z-index: 1;
+}
+.div4:hover {
+    transform: scale(1.15) translateY(-10px);
+    z-index: 10;
 }
 :root {
   --card-height: 80vh;
@@ -597,12 +668,9 @@ body{
 /* Phone View / Responsive Design */
 @media (max-width: 768px) {
     .hero-bg {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        row-gap: 40px;
-        padding-bottom: 50px;
-        justify-content: center;
-        justify-self: center;
+        /* Reset for mobile */
+        width: 100%;
+        height: 100%;
     }
     .head-txt{
         width: 80vw;
@@ -612,16 +680,23 @@ body{
     }
     .hero-bg{
         opacity: 1;
-        row-gap: 1rem;
-        width: 90vw;
     }
     .floating-shapes{
         display: none;
     }
     .div1, .div2, .div3, .div4 {
-        margin: 0;
-        justify-self: center;
-        width: 90vw;
+        /* Smaller balls on mobile */
+        width: 100px;
+        height: 100px;
+    }
+    .div1 { top: 10%; left: 5%; }
+    .div2 { top: 15%; right: 5%; width: 120px; height: 120px; }
+    .div3 { bottom: 10%; left: 10%; }
+    .div4 { bottom: 20%; right: 5%; }
+    
+    /* Hide some if too crowded */
+    .div2, .div3, .div4{
+        display: block; /* Ensure they show */
     }
     .glass-navbar{
        
@@ -632,9 +707,6 @@ body{
     .hero{
         padding-top: 6rem;
         min-height: 70vh;
-    }
-        .div2, .div3, .div4{
-        display: none;
     }
     .stack-container{
         padding-left: 0px;

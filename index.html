@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/index.css">
     <title>Komumech</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -15,6 +16,7 @@
   <div class="logo"><img src="https://komuhost.vercel.app/logo1.png" alt="Logo" style="height: 50px;"></div>
 </nav>
         <div class="hero">
+                <div id="hero-canvas"></div>
                 <div class="header">
                     <p class="head-txt">
                     </p>
@@ -22,48 +24,7 @@
                         Komumech is a creative web design agency dedicated to digital excellence. Explore our catalog to see a showcase of our innovative work and the immersive experiences we build.
                     </p>
                 </div>
-            <div class="hero-bg">
-                <div class="floating-shapes">
-                    <div class="shape shape-1"></div>
-                    <div class="shape shape-2"></div>
-                    <div class="shape shape-3"></div>
-                </div>
-               
-                <div class="bg-div div1">
-                    <div class="hover-content">
-                        <span class="view-text">View Site</span>
-                        <div class="arrow-circle">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="bg-div div2">
-                    <div class="hover-content">
-                        <span class="view-text">View Site</span>
-                        <div class="arrow-circle">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-div div3">
-                    <div class="hover-content">
-                        <span class="view-text">View Site</span>
-                        <div class="arrow-circle">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-div div4">
-                    <div class="hover-content">
-                        <span class="view-text">View Site</span>
-                        <div class="arrow-circle">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
         </div>
 
         <section class="stack-container">
@@ -160,6 +121,133 @@ document.querySelectorAll('.bg-div, .view-btn').forEach(div => {
         div.style.setProperty('--mouse-y', `${y}px`);
     });
 });
+</script>
+<script>
+    // Physics Simulation for Hero Background
+    document.addEventListener("DOMContentLoaded", () => {
+        const hero = document.querySelector('.hero');
+        const canvasContainer = document.getElementById('hero-canvas');
+    
+        if (!hero || !canvasContainer) return;
+    
+        const Engine = Matter.Engine,
+              Render = Matter.Render,
+              Runner = Matter.Runner,
+              Bodies = Matter.Bodies,
+              Composite = Matter.Composite,
+              Mouse = Matter.Mouse,
+              MouseConstraint = Matter.MouseConstraint;
+    
+        // Create engine
+        const engine = Engine.create();
+        engine.positionIterations = 20;
+        engine.velocityIterations = 20;
+        const world = engine.world;
+    
+        // Create renderer
+        const render = Render.create({
+            element: canvasContainer,
+            engine: engine,
+            options: {
+                width: hero.clientWidth,
+                height: hero.clientHeight,
+                background: 'transparent',
+                wireframes: false,
+                pixelRatio: window.devicePixelRatio
+            }
+        });
+    
+        // Boundaries
+        const wallOptions = { isStatic: true, render: { visible: false } };
+        let ground, leftWall, rightWall, topWall;
+    
+        const addWalls = () => {
+            const width = hero.clientWidth;
+            const height = hero.clientHeight;
+            const thickness = 60;
+            
+            Composite.remove(world, [ground, leftWall, rightWall, topWall].filter(Boolean));
+            
+            ground = Bodies.rectangle(width / 2, height + thickness / 2, width, thickness, wallOptions);
+            leftWall = Bodies.rectangle(0 - thickness / 2, height / 2, thickness, height * 2, wallOptions);
+            rightWall = Bodies.rectangle(width + thickness / 2, height / 2, thickness, height * 2, wallOptions);
+            topWall = Bodies.rectangle(width / 2, -height * 2, width, thickness, wallOptions);
+            
+            Composite.add(world, [ground, leftWall, rightWall, topWall]);
+        };
+        addWalls();
+    
+        // Balls
+        const colors = ['#ff7f00', '#1e5df2', '#ffc400', '#e39134', '#cb3fe7', '#ffffff'];
+        const balls = [];
+        
+        const isMobile = window.innerWidth < 768;
+        const minRadius = isMobile ? 15 : 25;
+        const radiusVar = isMobile ? 20 : 30;
+
+        // Calculate count to cover ~85% of screen height
+        const heroArea = hero.clientWidth * hero.clientHeight;
+        const avgRadius = minRadius + radiusVar / 2;
+        const ballCount = Math.floor((heroArea * 0.85) / (Math.PI * avgRadius * avgRadius)) + 7;
+
+        for (let i = 0; i < ballCount; i++) {
+            const radius = minRadius + Math.random() * radiusVar;
+            const x = Math.random() * hero.clientWidth;
+            const y = -Math.random() * 4000 - 500;
+            balls.push(Bodies.circle(x, y, radius, {
+                restitution: 0.6,
+                friction: 0.1,
+                frictionAir: 0.001, // Removed high density so mouse can lift them
+                render: { fillStyle: colors[Math.floor(Math.random() * colors.length)] }
+            }));
+        }
+        Composite.add(world, balls);
+    
+        // Mouse Control
+        const mouse = Mouse.create(render.canvas);
+        mouse.pixelRatio = window.devicePixelRatio; // Fixes mouse coordinates on high-res screens
+
+        // Fix: Allow scrolling by removing wheel capture
+        mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
+        mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
+        
+        const mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: { stiffness: 0.2, render: { visible: false } }
+        });
+        Composite.add(world, mouseConstraint);
+        render.mouse = mouse;
+
+        // Add mouse hover interaction (repulsion)
+        Matter.Events.on(engine, 'beforeUpdate', function() {
+            const mousePosition = mouse.position;
+            balls.forEach(ball => {
+                const dx = ball.position.x - mousePosition.x;
+                const dy = ball.position.y - mousePosition.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 200 && distance > 0) {
+                    const forceMagnitude = 0.002 * (1 - distance / 200);
+                    Matter.Body.applyForce(ball, ball.position, {
+                        x: (dx / distance) * forceMagnitude,
+                        y: (dy / distance) * forceMagnitude
+                    });
+                }
+            });
+        });
+    
+        // Run
+        Render.run(render);
+        const runner = Runner.create();
+        Runner.run(runner, engine);
+    
+        // Resize
+        window.addEventListener('resize', () => {
+            render.canvas.width = hero.clientWidth;
+            render.canvas.height = hero.clientHeight;
+            addWalls();
+        });
+    });
 </script>
 
 <script>
