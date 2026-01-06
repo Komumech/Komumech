@@ -147,17 +147,19 @@ body{
 }
 .head-txt{
     background-image: url(https://komuhost.vercel.app/img20.png);
-    height: 70px;
+    height: 100px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     width: 400px;
     justify-self: center;
     margin-bottom: 0px;
+    color: #e39134;
 
 }
 .under{
-    font-size: 1.1rem;
+    font-size: 1.57rem;
+    font-weight: 500;
     color: rgb(117, 67, 158);
     font-family: google sans;
     max-width: 600px;
