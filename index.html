@@ -1,270 +1,460 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/index.css">
-    <title>Komumech</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <title>KomuMech | Web Design & Development</title>
+    
+    <meta name="google-site-verification" content="vkT3drCdxxr5TG8QmPib3kSn4QvIAPb56NdNzSXS664" />
+    <meta name="title" content="KomuMech - Crafting Digital Experiences">
+    <meta name="description" content="Pushing the boundaries of web design through modern technology, creative logic, and high-performance coding.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://komumech.vercel.app/">
+    <meta property="og:title" content="KomuMech - Premium Web Ecosystems">
+    <meta property="og:description" content="Pushing the boundaries of web design through modern technology, creative logic, and high-performance coding.">
+    <meta property="og:image" content="https://komuhost.vercel.app/logo1.png">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://komumech.vercel.app/">
+    <meta property="twitter:title" content="KomuMech - Premium Web Ecosystems">
+    <meta property="twitter:description" content="Pushing the boundaries of web design through modern technology, creative logic, and high-performance coding.">
+    <meta property="twitter:image" content="https://komuhost.vercel.app/logo1.png">
+    
+    <link rel="icon" href="https://komuhost.vercel.app/logo1.png?v=2" type="image/png">
+
+    <style>@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');</style>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            /* Dark Mode (Default) */
+            --bg-color: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-highlight: rgba(255, 255, 255, 0.25);
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --accent: #60a5fa;
+            --accent-secondary: #c084fc;
+            --blob-opacity: 0.6;
+        }
+
+        [data-theme="light"] {
+            /* Light Mode */
+            --bg-color: #f1f5f9;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-highlight: rgba(0, 0, 0, 0.2);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --blob-opacity: 0.3;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Outfit', sans-serif; 
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- ANIMATED BACKGROUND BLOBS --- */
+        .background-blobs { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+            z-index: -2; overflow: hidden; background: var(--bg-color); 
+        }
+        .blob { 
+            position: absolute; filter: blur(90px); opacity: var(--blob-opacity); border-radius: 50%; 
+        }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #3b82f6; animation: roam-1 15s infinite ease-in-out; }
+        .blob-2 { top: 40%; right: -10%; width: 60vw; height: 60vw; background: #8b5cf6; animation: roam-2 18s infinite ease-in-out; }
+        .blob-3 { bottom: -20%; left: 20%; width: 50vw; height: 50vw; background: #ec4899; animation: roam-3 20s infinite ease-in-out; }
+
+        @keyframes roam-1 { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(30vw, 20vh); } 66% { transform: translate(10vw, 50vh); } }
+        @keyframes roam-2 { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(-40vw, -20vh); } 66% { transform: translate(-20vw, 30vh); } }
+        @keyframes roam-3 { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(40vw, -40vh); } 66% { transform: translate(-10vw, -20vh); } }
+
+        /* --- GLASSMORPHISM UTILITY --- */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- NAVIGATION BAR --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.8rem 1.5rem; margin: 1.5rem auto;
+            max-width: 1200px; width: 95%; position: sticky; top: 1rem; z-index: 1000;
+        }
+        .logo { 
+            font-size: 1.5rem; font-weight: 800; letter-spacing: 1px;
+            background: linear-gradient(to right, var(--accent), var(--accent-secondary)); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* Navbar Buttons */
+        .icon-btn { 
+            background: none; border: none; cursor: pointer; color: var(--text-primary); 
+            display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 12px; transition: 0.2s;
+        }
+        .icon-btn:hover { background: var(--glass-highlight); }
+        .icon-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+        /* App Launcher Menu */
+        .launcher-wrapper { position: relative; }
+        .app-menu {
+            position: absolute; top: 50px; right: 0; width: 240px;
+            display: none; padding: 15px; grid-template-columns: 1fr 1fr; gap: 10px;
+            z-index: 1001; animation: fadeIn 0.2s ease-out;
+        }
+        .app-menu.active { display: grid; }
+        .app-item {
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            text-decoration: none; color: var(--text-primary); font-size: 0.85rem; padding: 10px; border-radius: 12px; transition: 0.3s;
+        }
+        .app-item:hover { background: var(--glass-highlight); }
+        .app-item .app-icon { 
+            width: 40px; height: 40px; border-radius: 10px; margin-bottom: 8px;
+            display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.2rem;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- HERO SECTION --- */
+        header { max-width: 1200px; margin: 4rem auto 3rem; padding: 3rem 1.5rem; text-align: center; width: 95%; }
+        header h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; }
+        header p { font-size: 1.15rem; color: var(--text-secondary); max-width: 650px; margin: 0 auto 2rem; line-height: 1.6; }
+        .tech-stack { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .tech-badge { background: var(--glass-bg); padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; border: 1px solid var(--glass-border); }
+
+        /* --- REUSABLE SECTIONS & GRIDS --- */
+        .portfolio-section { max-width: 1200px; margin: 0 auto 5rem; padding: 0 1.5rem; width: 100%; }
+        .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; text-align: center; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .card { 
+            padding: 1.8rem; text-decoration: none; color: inherit; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s; 
+            height: 100%; display: flex; flex-direction: column; min-height: 220px;
+        }
+        .card:hover { transform: translateY(-8px) scale(1.02); border-color: var(--accent); background: var(--glass-highlight); }
+        .card h3 { margin-bottom: 10px; font-size: 1.4rem; }
+        .card p { font-size: 0.95rem; color: var(--text-secondary); flex-grow: 1; margin-bottom: 15px; line-height: 1.5; }
+        
+        .visit-btn { color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 5px; margin-top: auto; }
+        .visit-btn svg { width: 18px; height: 18px; transition: transform 0.3s; }
+        .card:hover .visit-btn svg { transform: translateX(5px) translateY(-5px); }
+
+        /* --- OUR ECOSYSTEM (APP CARDS) --- */
+        .apps-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .app-card { padding: 2.5rem 2rem; text-align: center; text-decoration: none; color: var(--text-primary); transition: 0.3s; border-radius: 24px; display: flex; flex-direction: column; align-items: center; }
+        .app-card:hover { transform: scale(1.03); background: var(--glass-highlight); border-color: var(--accent-secondary); }
+        
+        /* Material Icon Styling */
+        .material-symbols-rounded.app-card-icon { font-size: 3.5rem; margin-bottom: 1.2rem; display: block; background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Custom Image App Icon Styling */
+        .app-custom-image-icon { width: 64px; height: 64px; object-fit: cover; border-radius: 16px; margin-bottom: 1.2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+        .app-card h3 { margin-bottom: 10px; font-size: 1.5rem; }
+        .app-card p { color: var(--text-secondary); line-height: 1.5; }
+
+        /* --- MEDIA SHOWCASE --- */
+        .media-card { padding: 1rem !important; min-height: auto; }
+        .media-container { width: 100%; height: 220px; border-radius: 16px; overflow: hidden; margin-bottom: 15px; position: relative; }
+        .media-container img, .media-container video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .media-card:hover .media-container img { transform: scale(1.1); }
+
+        /* --- FAQ ACCORDION --- */
+        .faq-section { max-width: 800px; margin: 0 auto 6rem; padding: 0 1.5rem; width: 100%; }
+        .faq-item { margin-bottom: 15px; cursor: pointer; overflow: hidden; transition: 0.3s; }
+        .faq-item:hover { border-color: var(--accent); }
+        .faq-question { padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1rem; }
+        .faq-answer { max-height: 0; padding: 0 1.5rem; color: var(--text-secondary); line-height: 1.6; transition: max-height 0.4s ease, padding 0.4s ease; opacity: 0; }
+        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 1.5rem; opacity: 1; }
+        .faq-icon { transition: transform 0.4s ease; font-size: 1.2rem; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--accent); }
+
+        /* --- FOOTER --- */
+        footer { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 4rem 1.5rem 2rem; border-top: 1px solid var(--glass-border); margin-top: auto; }
+        [data-theme="light"] footer { background: rgba(255, 255, 255, 0.6); }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; }
+        .footer-brand { max-width: 400px; }
+        .footer-brand h2 { font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(to right, var(--accent), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer-brand p { color: var(--text-secondary); line-height: 1.6; }
+        
+        .social-btns { display: flex; gap: 15px; margin-top: 1.5rem; }
+        .social-btns a { 
+            width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--glass-border); color: var(--text-primary); transition: 0.3s; text-decoration: none;
+        }
+        .social-btns a:hover { transform: translateY(-5px); background: var(--glass-highlight); border-color: var(--accent); }
+        .social-btns svg { width: 22px; height: 22px; fill: currentColor; }
+
+        .footer-links h4 { margin-bottom: 1.2rem; font-size: 1.2rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: 10px; }
+        .footer-links a { text-decoration: none; color: var(--text-secondary); transition: 0.3s; }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
+
+        .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 3rem; border-top: 1px solid var(--glass-border); color: var(--text-secondary); font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            nav { width: 90%; padding: 0.8rem 1rem; }
+            header h1 { font-size: 2.5rem; }
+            .grid, .apps-container { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; text-align: center; align-items: center; }
+            .footer-links { text-align: center; }
+            .social-btns { justify-content: center; }
+            .faq-question { font-size: 1rem; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="glass-navbar">
-  <div class="logo"><img src="https://komuhost.vercel.app/logo1.png" alt="Logo" style="height: 50px;"></div>
-</nav>
-        <div class="hero">
-                <div id="hero-canvas"></div>
-                <div class="header">
-                    <p class="head-txt">
-                    </p>
-                    <p class="under">
-                        Komumech is a creative web design agency dedicated to digital excellence. Explore our catalog to see a showcase of our innovative work and the immersive experiences we build.
-                    </p>
-                </div>
 
-        </div>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
-        <section class="stack-container">
-  <div class="stack-card card-1">
- <img src="https://komuhost.vercel.app/img23.png" alt="">
- <a href="https://missionsafehouse.vercel.app/" class="view-btn">View Site <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-  </div>
-
-  <div class="stack-card card-2">
-    <img src="https://komuhost.vercel.app/img24.png" alt="">
-    <a href="https://t-tanalytics.vercel.app/" class="view-btn">View Site <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-  </div>
-
-  <div class="stack-card card-3">
- <img src="https://komuhost.vercel.app/img25.png" alt="">
- <a href="https://six-plus-one.vercel.app/" class="view-btn">View Site <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-  </div>
-    <div class="stack-card card-4">
- <img src="https://komuhost.vercel.app/img22.png" alt="">
- <a href="https://dailycrumb.netlify.app/" class="view-btn">View Site <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-  </div>
-  
-      <div class="stack-card card-5">
- <img src="https://komuhost.vercel.app/img21.png" alt="">
- <a href="https://komuthemedashboard.vercel.app/" class="view-btn">View Site <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-  </div>
-</section>
-
-<div class="footer">
-    <div class="footer-cont">
-        <div class="logo-animation"> 
-            <div class="logo-txt">
-                <img src="https://komuhost.vercel.app/logo1.png" alt="" srcset="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="li-div">
-                <h3 class="footer-title">Let's Connect</h3>
-                <div class="social-links">
-                    <a class="li social-link" href="https://github.com/komumech" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        <span>GitHub</span>
+    <nav class="glass">
+        <div class="logo">KomuMech</div>
+        <div class="nav-actions">
+            <button class="icon-btn" id="theme-toggle" title="Toggle Theme">
+                <svg id="theme-icon" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            
+            <div class="launcher-wrapper">
+                <button class="icon-btn" id="launcher-btn" title="Komu Apps">
+                    <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+                </button>
+                <div class="app-menu glass" id="app-menu">
+                    <a href="https://komunotes.vercel.app/" target="_blank" class="app-item">
+                        <div class="app-icon" style="background: #10b981;">N</div><span>Notes</span>
                     </a>
-                    <a class="li social-link" href="mailto:contact@komumech">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        <span>Email</span>
+                    <a href="https://komuthemedashboard.vercel.app/" target="_blank" class="app-item">
+                        <div class="app-icon" style="background: #3b82f6;">T</div><span>Theme</span>
+                    </a>
+                    <a href="https://komucalendar.vercel.app/" target="_blank" class="app-item">
+                        <div class="app-icon" style="background: #f59e0b;">C</div><span>Calendar</span>
+                    </a>
+                    <a href="https://komu-search.streamlit.app/" target="_blank" class="app-item">
+                        <div class="app-icon" style="background: #ef4444;">S</div><span>Search</span>
                     </a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-    </div>
-</body>
-<script>
-window.addEventListener('scroll', function() {
-  const navbar = document.querySelector('.glass-navbar');
-  
-  if (window.scrollY > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-});
+    </nav>
 
-// Parallax Effect for Floating Shapes
-document.addEventListener('mousemove', (e) => {
-    const shapes = document.querySelectorAll('.shape');
-    const bgDivs = document.querySelectorAll('.bg-div');
-    const x = (window.innerWidth - e.pageX * 2) / 100;
-    const y = (window.innerHeight - e.pageY * 2) / 100;
+    <header class="glass">
+        <h1>Crafting Digital Experiences</h1>
+        <p>Hi, I'm the lead designer and developer behind KomuMech. We specialize in building responsive, modern, and high-performance web applications with clean UI/UX.</p>
+        <div class="tech-stack">
+            <span class="tech-badge">Next.js</span>
+            <span class="tech-badge">Vue.js</span>
+            <span class="tech-badge">JavaScript</span>
+            <span class="tech-badge">UI/UX Design</span>
+            <span class="tech-badge">AI Integration</span>
+        </div>
+    </header>
 
-    shapes.forEach((shape, index) => {
-        const speed = (index + 1) * 1.5;
-        shape.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px)`;
-    });
+    <section class="portfolio-section">
+        <h2 class="section-title">Our Ecosystem</h2>
+        <div class="apps-container">
+            <a href="https://komunotes.vercel.app/" class="app-card glass" target="_blank">
+                <img src="note.jpg" alt="Komu Notes Icon" class="app-custom-image-icon">
+                <h3>Komu Notes</h3>
+                <p>Capture your thoughts beautifully. Advanced note-taking with cross-device archiving.</p>
+            </a>
+            <a href="https://komucalendar.vercel.app/" class="app-card glass" target="_blank">
+                <span class="material-symbols-rounded app-card-icon">calendar_month</span>
+                <h3>Komu Calendar</h3>
+                <p>A high-performance scheduling and time-management tool designed for productivity.</p>
+            </a>
+            <a href="https://komu-search.streamlit.app/" class="app-card glass" target="_blank">
+                <span class="material-symbols-rounded app-card-icon">manage_search</span>
+                <h3>Komu Search</h3>
+                <p>Intelligent vector search and web indexing engine powered by modern architecture.</p>
+            </a>
+        </div>
+    </section>
 
-    bgDivs.forEach((div, index) => {
-        const speed = (index + 1) * 0.5;
-        const xDir = index % 2 === 0 ? 1 : -1;
-        const yDir = index < 2 ? 1 : -1;
-        div.style.transform = `translateX(${x * speed * xDir}px) translateY(${y * speed * yDir}px)`;
-    });
-});
+    <main class="portfolio-section">
+        <h2 class="section-title">Featured Works</h2>
+        <div class="grid" id="portfolio-grid">
+            </div>
+    </main>
 
-// Direction-aware Bubble Effect
-document.querySelectorAll('.bg-div, .view-btn').forEach(div => {
-    div.addEventListener('mouseenter', (e) => {
-        const rect = div.getBoundingClientRect();
-        // Calculate mouse position relative to the element
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        div.style.setProperty('--mouse-x', `${x}px`);
-        div.style.setProperty('--mouse-y', `${y}px`);
-    });
-});
-</script>
-<script>
-    // Physics Simulation for Hero Background
-    document.addEventListener("DOMContentLoaded", () => {
-        const hero = document.querySelector('.hero');
-        const canvasContainer = document.getElementById('hero-canvas');
-    
-        if (!hero || !canvasContainer) return;
-    
-        const Engine = Matter.Engine,
-              Render = Matter.Render,
-              Runner = Matter.Runner,
-              Bodies = Matter.Bodies,
-              Composite = Matter.Composite,
-              Mouse = Matter.Mouse,
-              MouseConstraint = Matter.MouseConstraint;
-    
-        // Create engine
-        const engine = Engine.create();
-        engine.positionIterations = 20;
-        engine.velocityIterations = 20;
-        const world = engine.world;
-    
-        // Create renderer
-        const render = Render.create({
-            element: canvasContainer,
-            engine: engine,
-            options: {
-                width: hero.clientWidth,
-                height: hero.clientHeight,
-                background: 'transparent',
-                wireframes: false,
-                pixelRatio: window.devicePixelRatio
+    <section class="portfolio-section">
+        <h2 class="section-title">Visual Showcase</h2>
+        <div class="grid">
+            <div class="card glass media-card">
+                <div class="media-container">
+                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800" alt="UI Design">
+                </div>
+                <h3>Design Systems</h3>
+                <p>Clean glassmorphism interfaces and precise component architecture.</p>
+            </div>
+            <div class="card glass media-card">
+                <div class="media-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-gradient-background-20241-large.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3>Motion UI</h3>
+                <p>Interactive smooth animations for a premium user experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title">People Also Ask</h2>
+        <div class="faq-item glass">
+            <div class="faq-question">What is the meaning of KOMU? <span class="faq-icon">↓</span></div>
+            <div class="faq-answer">KOMU represents our goal to unify digital information into one seamless, modern workspace. It stands for highly organized, scalable tech development.</div>
+        </div>
+        <div class="faq-item glass">
+            <div class="faq-question">What language is KOMU? <span class="faq-icon">↓</span></div>
+            <div class="faq-answer">KOMU is a creative fusion. While it sounds globally modern, it is rooted in the universal language of clean technology and efficient code.</div>
+        </div>
+        <div class="faq-item glass">
+            <div class="faq-question">Where does the name KOMU come from? <span class="faq-icon">↓</span></div>
+            <div class="faq-answer">The name was derived from "KomuMech," our original technology suite. It's meant to be short, memorable, and energetic, reflecting our fast-paced development style.</div>
+        </div>
+        <div class="faq-item glass">
+            <div class="faq-question">Is KOMU a company? <span class="faq-icon">↓</span></div>
+            <div class="faq-answer">Yes, KOMU is the consumer-facing app division of KomuMech Agency, a technology organization dedicated to building premium digital tools.</div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>KomuMech</h2>
+                <p>Pushing the boundaries of web design through modern technology, creative logic, and high-performance coding.</p>
+                <div class="social-btns">
+                    <a href="https://github.com/komumech" target="_blank" title="GitHub">
+                        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/komumech" target="_blank" title="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#" onclick="window.scrollTo(0,0); return false;">Back to Top</a></li>
+                    <li><a href="mailto:contact@komumech.com">Hire KomuMech</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 KomuMech Agency. Designed and Developed in Lagos.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. DYNAMIC PORTFOLIO GRID INJECTION
+        const projects = [
+            { title: "KomuTheme Dashboard", desc: "A sleek, dynamic utility dashboard offering specialized snippets and user interfaces.", url: "https://komuthemedashboard.vercel.app/" },
+            { title: "Daily Crumb", desc: "A modern web experience deployed on Netlify, focusing on clean layouts.", url: "https://dailycrumb.netlify.app/" },
+            { title: "Komu Calendar", desc: "An intuitive scheduling and time-management application interface.", url: "https://komucalendar.vercel.app/" },
+            { title: "T-T Analytics", desc: "A data visualization interface built for tracking and analytics readouts.", url: "https://t-tanalytics.vercel.app/" },
+            { title: "Komu Notes", desc: "A responsive application dedicated to note-taking and thought organization.", url: "https://komunotes.vercel.app/" },
+            { title: "Integra Co-op", desc: "A collaborative web platform designed for team and cooperative management.", url: "https://integraco-op.vercel.app/" },
+            { title: "Mission Safehouse", desc: "A specialized front-end build focusing on distinct thematic presentation.", url: "https://missionsafehouse.vercel.app/" },
+            { title: "Sir Paul", desc: "A customized personal or professional landing page featuring polished aesthetics.", url: "https://sirpaul.vercel.app/" },
+            { title: "Six Plus One", desc: "An interactive web application showcasing unique front-end logic and styling.", url: "https://six-plus-one.vercel.app/" }
+        ];
+
+        const grid = document.getElementById('portfolio-grid');
+        projects.forEach(project => {
+            const card = document.createElement('a');
+            card.href = project.url;
+            card.target = "_blank";
+            card.rel = "noopener noreferrer";
+            card.className = "card glass";
+            
+            card.innerHTML = `
+                <div>
+                    <h3>${project.title}</h3>
+                    <p>${project.desc}</p>
+                </div>
+                <div class="visit-btn">
+                    Visit Live Site 
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // 2. THEME TOGGLE LOGIC (LIGHT/DARK MODE)
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const root = document.documentElement;
+
+        themeBtn.addEventListener('click', () => {
+            const isDark = root.getAttribute('data-theme') === 'dark';
+            root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            
+            // Swap SVG Path between Moon and Sun
+            themeIcon.innerHTML = isDark 
+                ? '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' // Sun
+                : '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'; // Moon
+        });
+
+        // 3. APP LAUNCHER LOGIC (9-DOT MENU)
+        const launcherBtn = document.getElementById('launcher-btn');
+        const appMenu = document.getElementById('app-menu');
+
+        launcherBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevents click from bubbling to document
+            appMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking anywhere else on the page
+        document.addEventListener('click', (e) => {
+            if (!launcherBtn.contains(e.target) && !appMenu.contains(e.target)) {
+                appMenu.classList.remove('active');
             }
         });
-    
-        // Boundaries
-        const wallOptions = { isStatic: true, render: { visible: false } };
-        let ground, leftWall, rightWall, topWall;
-    
-        const addWalls = () => {
-            const width = hero.clientWidth;
-            const height = hero.clientHeight;
-            const thickness = 60;
-            
-            Composite.remove(world, [ground, leftWall, rightWall, topWall].filter(Boolean));
-            
-            ground = Bodies.rectangle(width / 2, height + thickness / 2, width, thickness, wallOptions);
-            leftWall = Bodies.rectangle(0 - thickness / 2, height / 2, thickness, height * 2, wallOptions);
-            rightWall = Bodies.rectangle(width + thickness / 2, height / 2, thickness, height * 2, wallOptions);
-            topWall = Bodies.rectangle(width / 2, -height * 2, width, thickness, wallOptions);
-            
-            Composite.add(world, [ground, leftWall, rightWall, topWall]);
-        };
-        addWalls();
-    
-        // Balls
-        const colors = ['#35b6a8', '#1e5df2', '#58028b', '#fff000', '#cb3fe7', '#ed4373'];
-        const balls = [];
+
+        // 4. FAQ ACCORDION LOGIC
+        const faqItems = document.querySelectorAll('.faq-item');
         
-        const isMobile = window.innerWidth < 768;
-        const minRadius = isMobile ? 15 : 25;
-        const radiusVar = isMobile ? 20 : 30;
-
-        // Calculate count to cover ~85% of screen height
-        const heroArea = hero.clientWidth * hero.clientHeight;
-        const avgRadius = minRadius + radiusVar / 2;
-        const ballCount = Math.floor((heroArea * 0.85) / (Math.PI * avgRadius * avgRadius)) + 7;
-
-        for (let i = 0; i < ballCount; i++) {
-            const radius = minRadius + Math.random() * radiusVar;
-            const x = Math.random() * hero.clientWidth;
-            const y = -Math.random() * 4000 - 500;
-            balls.push(Bodies.circle(x, y, radius, {
-                restitution: 0.6,
-                friction: 0.1,
-                frictionAir: 0.001, // Removed high density so mouse can lift them
-                render: { fillStyle: colors[Math.floor(Math.random() * colors.length)] }
-            }));
-        }
-        Composite.add(world, balls);
-    
-        // Mouse Control
-        const mouse = Mouse.create(render.canvas);
-        mouse.pixelRatio = window.devicePixelRatio; // Fixes mouse coordinates on high-res screens
-
-        // Fix: Allow scrolling by removing wheel capture
-        mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
-        mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
-        
-        const mouseConstraint = MouseConstraint.create(engine, {
-            mouse: mouse,
-            constraint: { stiffness: 0.2, render: { visible: false } }
-        });
-        Composite.add(world, mouseConstraint);
-        render.mouse = mouse;
-
-        // Add mouse hover interaction (repulsion)
-        Matter.Events.on(engine, 'beforeUpdate', function() {
-            const mousePosition = mouse.position;
-            balls.forEach(ball => {
-                const dx = ball.position.x - mousePosition.x;
-                const dy = ball.position.y - mousePosition.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
                 
-                if (distance < 200 && distance > 0) {
-                    const forceMagnitude = 0.002 * (1 - distance / 200);
-                    Matter.Body.applyForce(ball, ball.position, {
-                        x: (dx / distance) * forceMagnitude,
-                        y: (dy / distance) * forceMagnitude
-                    });
+                // Close all currently open items
+                faqItems.forEach(i => i.classList.remove('active'));
+                
+                // If the clicked item wasn't active, open it
+                if (!isActive) {
+                    item.classList.add('active');
                 }
             });
         });
-    
-        // Run
-        Render.run(render);
-        const runner = Runner.create();
-        Runner.run(runner, engine);
-    
-        // Resize
-        window.addEventListener('resize', () => {
-            render.canvas.width = hero.clientWidth;
-            render.canvas.height = hero.clientHeight;
-            addWalls();
-        });
-    });
-</script>
-
-<script>
-    window.addEventListener('scroll', () => {
-  const cards = document.querySelectorAll('.stack-card');
-  const scrollPos = window.scrollY;
-
-  cards.forEach((card, index) => {
-    const cardTop = card.offsetTop;
-    // As the user scrolls past a card, it shrinks slightly
-    if (scrollPos > cardTop) {
-      const scaleValue = 1 - (scrollPos - cardTop) * 0.0001;
-      card.style.transform = `scale(${Math.max(scaleValue, 0.9)})`;
-    } else {
-      card.style.transform = `scale(1)`;
-    }
-  });
-});
-</script>
+    </script>
+</body>
 </html>
