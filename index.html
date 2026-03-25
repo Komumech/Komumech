@@ -23,6 +23,48 @@
     
     <link rel="icon" href="https://komuhost.vercel.app/logo1.png?v=2" type="image/png">
 
+    <!-- FAQ Schema for Google Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the meaning of KOMU?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "KOMU represents our goal to unify digital information into one seamless, modern workspace. It stands for highly organized, scalable tech development."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What language is KOMU?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "KOMU is a creative fusion. While it sounds globally modern, it is rooted in the universal language of clean technology and efficient code."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does the name KOMU come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The name was derived from \"KomuMech,\" our original technology suite. It's meant to be short, memorable, and energetic, reflecting our fast-paced development style."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is KOMU a company?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, KOMU is the consumer-facing app division of KomuMech Agency, a technology organization dedicated to building premium digital tools."
+          }
+        }
+      ]
+    }
+    </script>
+
     <style>@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');</style>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24..48,100..700,0..1,-50..200" rel="stylesheet" />
 
@@ -121,9 +163,15 @@
         .app-menu {
             position: absolute; top: 50px; right: 0; width: 240px;
             display: none; padding: 15px; grid-template-columns: 1fr 1fr; gap: 10px;
-            z-index: 1001; animation: fadeIn 0.2s ease-out;
+            z-index: 1001;
+            backdrop-filter: blur(24px); /* Increased blur for a more premium look */
+            -webkit-backdrop-filter: blur(24px);
+            transform-origin: top right;
         }
-        .app-menu.active { display: grid; }
+        .app-menu.active { 
+            display: grid; 
+            animation: googlePop 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
         .app-item {
             display: flex; flex-direction: column; align-items: center; text-align: center;
             text-decoration: none; color: var(--text-primary); font-size: 0.85rem; padding: 10px; border-radius: 12px; transition: 0.3s;
@@ -133,7 +181,10 @@
             width: 40px; height: 40px; border-radius: 10px; margin-bottom: 8px;
             display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; font-size: 1.2rem;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes googlePop { 
+            from { opacity: 0; transform: scale(0.92) translateY(-15px); } 
+            to { opacity: 1; transform: scale(1) translateY(0); } 
+        }
 
         /* --- HERO SECTION --- */
         header { max-width: 1200px; margin: 4rem auto 3rem; padding: 3rem 1.5rem; text-align: center; width: 95%; }
@@ -307,7 +358,7 @@
         <div class="grid">
             <div class="card glass media-card">
                 <div class="media-container">
-                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800" alt="UI Design">
+                    <img src="img2.png" alt="UI Design">
                 </div>
                 <h3>Design Systems</h3>
                 <p>Clean glassmorphism interfaces and precise component architecture.</p>
@@ -315,7 +366,7 @@
             <div class="card glass media-card">
                 <div class="media-container">
                     <video autoplay muted loop playsinline>
-                        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-gradient-background-20241-large.mp4" type="video/mp4">
+                        <source src="vid1.mp4" type="video/mp4">
                     </video>
                 </div>
                 <h3>Motion UI</h3>
@@ -362,7 +413,7 @@
                 <h4>Navigation</h4>
                 <ul>
                     <li><a href="#" onclick="window.scrollTo(0,0); return false;">Back to Top</a></li>
-                    <li><a href="mailto:contact@komumech.com">Hire KomuMech</a></li>
+                    <li><a href="mailto:contact@komumech@gmail.com">Hire KomuMech</a></li>
                 </ul>
             </div>
         </div>
