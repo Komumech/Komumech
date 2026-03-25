@@ -1,0 +1,75 @@
+.navbar {
+            background-color: #ffffff;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 500;
+            color: #5f6368;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo span { color: #202124; }
+        .nav-menu {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .nav-item {
+            text-decoration: none;
+            color: #5f6368;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .nav-item:hover {
+            background-color: #f1f3f4;
+            color: #202124;
+        }
+        .nav-btn {
+            background-color: #1a73e8;
+            color: white;
+            padding: 8px 24px;
+            border-radius: 25px;
+            margin-left: 12px;
+        }
+        .nav-btn:hover {
+            background-color: var(--primary-color);
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            color: white;
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 16px;
+                box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+                align-items: stretch;
+            }
+            .nav-menu.active { display: flex; }
+            .nav-btn { margin: 8px 0 0 0; text-align: center; }
+        }
