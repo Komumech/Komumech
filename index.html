@@ -3,14 +3,196 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="KomuMech crafts expressive, high-performance digital experiences.">
-  <title>KomuMech — Web design & development</title>
-    <link rel="stylesheet" href="style.css">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-  <style>
+  <!-- =========================================================
+       1. Core SEO & Technical Indexing Meta Tags
+       ========================================================= -->
+  <title>KomuMech — Crafting Digital Experiences | Web Apps & UI/UX Design</title>
+  <meta name="description" content="KomuMech specializes in building responsive, modern, and high-performance web applications with clean UI/UX, Next.js, Vue.js, and AI integrations. Designed & Developed in Lagos.">
+  <meta name="keywords" content="KomuMech, Komu, Web Development Lagos, UI/UX Design, Next.js Developer, Vue.js, AI Integration, Komu Search, Komu Notes, Komu Calendar">
+  <meta name="author" content="KomuMech Agency">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  
+  <!-- Canonical URL (Prevents duplicate content penalties) -->
+  <link rel="canonical" href="https://komumech.com/">
+
+  <!-- Mobile & Web App Theme Accent -->
+  <meta name="theme-color" content="#180d36">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- =========================================================
+       2. Favicons & Mobile Touch Icons
+       ========================================================= -->
+  <!-- Browser tab icon -->
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="shortcut icon" href="/logo.png">
+
+  <!-- Apple iOS home screen icon -->
+  <link rel="apple-touch-icon" href="/logo.png">
+
+  <!-- =========================================================
+       3. Open Graph Metadata (Facebook, WhatsApp, LinkedIn, Discord)
+       ========================================================= -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="KomuMech Agency">
+  <meta property="og:url" content="https://komumech.com/">
+  <meta property="og:title" content="KomuMech — Crafting Digital Experiences">
+  <meta property="og:description" content="Specializing in responsive, high-performance web applications, modern UI/UX design systems, and AI integration.">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Absolute image URL required for social platforms -->
+  <meta property="og:image" content="https://komumech.com/logo.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="KomuMech Agency Logo & Branding">
+
+  <!-- =========================================================
+       4. Twitter / X Cards
+       ========================================================= -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@KomuMech">
+  <meta name="twitter:title" content="KomuMech — Crafting Digital Experiences">
+  <meta name="twitter:description" content="High-performance web apps, clean UI/UX, and AI integrations engineered in Lagos.">
+  <meta name="twitter:image" content="https://komumech.com/logo.png">
+
+  <!-- =========================================================
+       5. Google JSON-LD Structured Data (Rich Snippets & AI Graphs)
+       ========================================================= -->
+
+  <!-- A. Organization & WebSite Schema (Brand & Search Box) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://komumech.com/#organization",
+        "name": "KomuMech Agency",
+        "alternateName": ["KomuMech", "KOMU"],
+        "url": "https://komumech.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://komumech.com/logo.png"
+        },
+        "description": "Technology agency dedicated to building premium digital tools, high-performance web apps, and modern UI/UX.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lagos",
+          "addressCountry": "NG"
+        },
+        "knowsAbout": [
+          "Web Development",
+          "UI/UX Design",
+          "Next.js",
+          "Vue.js",
+          "JavaScript",
+          "AI Integration",
+          "Vector Search Engines"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://komumech.com/#website",
+        "url": "https://komumech.com",
+        "name": "KomuMech",
+        "publisher": {
+          "@id": "https://komumech.com/#organization"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- B. FAQPage Schema (Triggers Google's "People Also Ask" Rich Snippets) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the meaning of KOMU?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "KOMU represents our goal to unify digital information into one seamless, modern workspace. It stands for highly organized, scalable tech development."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What language is KOMU?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "KOMU is a creative fusion. While it sounds globally modern, it is rooted in the universal language of clean technology and efficient code."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the name KOMU come from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The name was derived from 'KomuMech,' our original technology suite. It's meant to be short, memorable, and energetic, reflecting our fast-paced development style."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is KOMU a company?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, KOMU is the consumer-facing app division of KomuMech Agency, a technology organization dedicated to building premium digital tools."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- C. Ecosystem & Portfolio Projects Schema (Software / ItemList) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "KomuMech Digital Ecosystem & Featured Portfolio",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Komu Notes",
+          "applicationCategory": "ProductivityApplication",
+          "operatingSystem": "Web",
+          "description": "Capture your thoughts beautifully. Advanced note-taking with cross-device archiving."
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Komu Calendar",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": "A high-performance scheduling and time-management tool designed for productivity."
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Komu Search",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Web",
+          "description": "Intelligent vector search and web indexing engine powered by modern architecture."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+    <style>
     .first{
       width: 80%;
     }
@@ -19,8 +201,6 @@
       height: 30px;
     }
   </style>
-</head>
-<body>
   <header class="site-header shell" id="top">
     <nav aria-label="Main navigation">
       <a class="brand" href="#top" aria-label="KomuMech home"> <img class="logo" src="logo.png" alt="" srcset=""> <span>KomuMech</span></a>
