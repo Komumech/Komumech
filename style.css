@@ -1,0 +1,1106 @@
+/* =========================================================
+   Global Variables & Reset
+   ========================================================= */
+:root {
+  --ink: #180d36;
+  --purple: #6d38ee;
+  --blue: #55b8ff;
+  --lilac: #eee9ff;
+  --line: #ddd6ee;
+  --paper: #fffefe;
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+a { 
+  color: inherit; 
+  text-decoration: none; 
+}
+
+.shell { 
+  width: min(1440px, calc(100% - 64px)); 
+  margin: auto; 
+}
+
+/* =========================================================
+   Header & Navigation
+   ========================================================= */
+.site-header nav {
+  height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.brand { 
+  display: flex; 
+  align-items: center; 
+  gap: 11px; 
+  font-size: 19px; 
+  letter-spacing: -0.05em; 
+}
+
+.brand-mark {
+  width: 25px; 
+  height: 25px; 
+  background: var(--purple);
+  border-radius: 8px 8px 3px 8px; 
+  transform: rotate(45deg); 
+  position: relative;
+}
+
+.brand-mark:after {
+  content: ""; 
+  position: absolute; 
+  width: 8px; 
+  height: 8px; 
+  border-radius: 50%;
+  background: var(--blue); 
+  right: 3px; 
+  top: 3px;
+}
+
+.nav-links { 
+  display: flex; 
+  align-items: center; 
+  gap: 32px; 
+}
+
+.nav-links a { 
+  font-size: 15px; 
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--purple);
+}
+
+.nav-links a:first-child { 
+  border: 1px solid var(--ink); 
+  border-radius: 99px; 
+  padding: 12px 19px; 
+}
+
+.nav-links a:first-child:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* =========================================================
+   Hero Section & Panoramic Phone Rail
+   ========================================================= */
+.hero {
+  height: max(680px, calc(100vh - 104px));
+  min-height: 640px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  padding: 40px 0 80px;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: min(780px, 100%);
+  pointer-events: none;
+}
+
+.hero-copy > * { 
+  pointer-events: auto; 
+}
+
+.eyebrow, .section-label {
+  font: 12px "DM Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--purple);
+  margin: 0;
+}
+
+.hero h1 {
+  font-size: clamp(4.2rem, 10.5vw, 10.8rem);
+  letter-spacing: -0.1em;
+  line-height: .78;
+  margin: 23px -8vw 28px;
+  font-weight: 700;
+}
+
+.hero h1 em {
+  display: block;
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+  font-size: .72em;
+  line-height: 1.05;
+  color: var(--purple);
+}
+
+.intro {
+  font-size: 18px;
+  line-height: 1.55;
+  max-width: 490px;
+  margin: 0 auto 31px;
+}
+
+.round-link {
+  width: 88px; 
+  height: 88px; 
+  background: var(--ink); 
+  color: white; 
+  border-radius: 50%;
+  display: inline-flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  font: 11px "DM Mono"; 
+  gap: 4px; 
+  transition: .25s;
+}
+
+.round-link span { 
+  font: 20px "DM Sans"; 
+  color: var(--blue); 
+  line-height: 12px; 
+}
+
+.round-link:hover { 
+  background: var(--purple); 
+  transform: translateY(5px); 
+}
+
+.hero-foot { 
+  position: absolute; 
+  bottom: 36px; 
+  z-index: 2; 
+  font: 11px "DM Mono"; 
+  color: #82769c; 
+}
+
+.hero-foot span { 
+  color: var(--purple); 
+  font-size: 18px; 
+}
+
+/* 3D Panoramic Track */
+.phone-rail {
+  position: absolute;
+  z-index: 1;
+  top: 30%;
+  left: 50%;
+  width: 130vw;
+  height: 0;
+  transform: translate(-50%, -47%);
+  perspective: 1600px;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.phone {
+  position: absolute;
+  width: 170px;
+  height: 350px;
+  background: white;
+  padding: 9px;
+  border: 1px solid #d9d1ed;
+  border-radius: 26px;
+  box-shadow: 0 14px 35px rgba(71, 36, 138, 0.08);
+  top: -170px;
+  left: 50%;
+  margin-left: -85px;
+  transform-style: preserve-3d;
+  animation: panoramicDrift 20s linear infinite;
+  pointer-events: auto;
+  will-change: transform, opacity, filter;
+  transition: transform .6s cubic-bezier(.2,.9,.2,1), box-shadow .35s, filter .35s, opacity .35s;
+}
+
+.phone-rail:hover .phone { 
+  animation-play-state: paused; 
+}
+
+.phone:hover {
+  filter: blur(0px) grayscale(0) !important;
+  opacity: 1 !important;
+  box-shadow: 0 20px 45px rgba(109, 56, 238, 0.25);
+}
+
+@keyframes panoramicDrift {
+  0% { transform: translateX(90vw) translateZ(-160px) rotateY(-50deg) scaleX(1.6) scaleY(0.9); opacity: 0.12; filter: blur(4px) grayscale(1); }
+  20% { transform: translateX(45vw) translateZ(-40px) rotateY(-22deg) scaleX(1.25) scaleY(0.98); opacity: 0.55; filter: blur(1.2px) grayscale(0.8); }
+  50% { transform: translateX(0vw) translateZ(80px) rotateY(0deg) scaleX(0.85) scaleY(0.85); opacity: 0.98; filter: blur(0px) grayscale(0); }
+  80% { transform: translateX(-45vw) translateZ(-40px) rotateY(22deg) scaleX(1.25) scaleY(0.98); opacity: 0.55; filter: blur(1.2px) grayscale(0.8); }
+  100% { transform: translateX(-90vw) translateZ(-160px) rotateY(50deg) scaleX(1.6) scaleY(0.9); opacity: 0.12; filter: blur(4px) grayscale(1); }
+}
+
+.p-one   { animation-delay: 0s; }
+.p-two   { animation-delay: -2.85s; }
+.p-three { animation-delay: -5.7s; }
+.p-four  { animation-delay: -8.55s; }
+.p-five  { animation-delay: -11.4s; }
+.p-six   { animation-delay: -14.25s; }
+.p-seven { animation-delay: -17.1s; }
+
+.screen {
+  height: 50%;
+  border-radius: 18px;
+  padding: 14px;
+  overflow: hidden;
+  background: linear-gradient(150deg, #f2efff, #fff 43%, #dff5ff);
+  text-align: left;
+  filter: grayscale(1) contrast(1.02) saturate(.9);
+  transition: filter .35s ease, opacity .35s ease, transform .35s ease;
+}
+
+.notch { 
+  width: 44px; 
+  height: 6px; 
+  border-radius: 20px; 
+  background: var(--ink); 
+  opacity: .32; 
+  margin: 0 auto 18px; 
+}
+
+.screen small { 
+  font: 8px "DM Mono"; 
+  color: #7d7594; 
+}
+
+.screen h4 { 
+  font-size: 16px; 
+  letter-spacing: -.06em; 
+  margin: 6px 0 16px; 
+}
+
+.phone:hover .screen, .phone:focus-within .screen { 
+  filter: none; 
+}
+
+/* =========================================================
+   Featured Work Grid & Cards
+   ========================================================= */
+.work { 
+  padding: 140px 0; 
+}
+
+.section-head { 
+  display: flex; 
+  align-items: flex-end; 
+  justify-content: space-between; 
+  margin-bottom: 50px; 
+}
+
+.section-head h2, .services-head h2 { 
+  margin: 14px 0 0; 
+  font-size: clamp(3.4rem, 6vw, 6.6rem); 
+  line-height: .87; 
+  letter-spacing: -0.09em; 
+  text-align: left; 
+}
+
+.section-head > p { 
+  max-width: 280px; 
+  margin: 0; 
+  line-height: 1.55; 
+  font-size: 15px; 
+  color: #5a526b; 
+  text-align: left; 
+}
+
+.featured-grid { 
+  display: grid; 
+  grid-template-columns: repeat(12, 1fr); 
+  gap: 24px; 
+}
+
+.feature {
+  min-height: 280px;
+  max-height: 340px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, background 0.35s ease;
+  transform-origin: center center;
+}
+
+.feature:nth-child(1), .feature:nth-child(4) { grid-column: span 7; }
+.feature:nth-child(2), .feature:nth-child(3) { grid-column: span 5; }
+
+.feature-dark { background: var(--ink); color: #fff; }
+.feature-blue { background: #bcecff; color: #111; }
+.feature-lilac { background: #f0ebff; color: #111; }
+.feature-purple { background: #9c75fa; color: #fff; }
+
+/* Left Text Column */
+.feature-content {
+  width: 48%;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.feature-meta { 
+  display: flex; 
+  justify-content: space-between; 
+  font: 12px "DM Mono", monospace; 
+  opacity: 0.8;
+  letter-spacing: 0.04em;
+}
+
+.feature-body h3 { 
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem); 
+  letter-spacing: -0.06em; 
+  line-height: 0.95; 
+  margin: 0; 
+  font-weight: 700;
+}
+
+.feature-body p { 
+  margin: 10px 0 0; 
+  font-size: 15px; 
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+/* Right Media Column */
+.feature-media {
+  width: 52%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 16px 16px 16px 0;
+}
+
+.feature .project-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: -4px 8px 20px rgba(0, 0, 0, 0.12);
+  filter: grayscale(1) opacity(0.7);
+  transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+  transform-origin: right center;
+}
+
+/* Hover Horizontal Expansion */
+.feature:hover {
+  transform: scaleX(1.03) translateY(-2px);
+  box-shadow: 0 20px 40px rgba(24, 13, 54, 0.16);
+  z-index: 10;
+}
+
+.feature:hover .project-image {
+  filter: grayscale(0) opacity(1);
+  transform: scale(1.02);
+}
+
+/* Secondary Project Row List */
+.more-work { 
+  margin-top: 110px; 
+}
+
+.project-list { 
+  border-top: 1px solid var(--line); 
+  margin-top: 20px; 
+}
+
+.project-row {
+  display: grid; 
+  grid-template-columns: 72px 0.3fr 1fr auto; 
+  gap: 16px; 
+  align-items: center;
+  border-bottom: 1px solid var(--line); 
+  padding: 18px 8px; 
+  transition: .18s;
+}
+
+.project-row:hover { 
+  padding-left: 16px; 
+  background: var(--lilac); 
+}
+
+.project-row span { 
+  font: 12px "DM Mono"; 
+  color: var(--purple); 
+}
+
+.project-row h3 { 
+  font-size: 22px; 
+  margin: 0; 
+  letter-spacing: -0.05em; 
+}
+
+.project-row p { 
+  font-size: 15px; 
+  margin: 0; 
+  color: #655d78; 
+}
+
+.project-row b { 
+  font-size: 22px; 
+}
+
+.project-row img {
+  width: 96px;
+  height: 44px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  filter: grayscale(1);
+  transition: filter .22s ease, transform .22s ease;
+}
+
+.project-row:hover img { 
+  filter: grayscale(0); 
+  transform: scale(1.03); 
+}
+
+/* =========================================================
+   Services Section
+   ========================================================= */
+.services { 
+  background: var(--ink); 
+  color: #fff; 
+  padding: 130px 0 60px; 
+}
+
+.services-head { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 30px; 
+  align-items: flex-end; 
+  margin-bottom: 74px; 
+}
+
+.services-head h2 em { 
+  font-family: "Playfair Display"; 
+  font-weight: 500; 
+  color: var(--blue); 
+}
+
+.services-head > p { 
+  max-width: 360px; 
+  justify-self: end; 
+  margin: 0; 
+  color: #d8d0ee; 
+  line-height: 1.6; 
+  font-size: 16px; 
+}
+
+.service-list { 
+  border-top: 1px solid #ffffff42; 
+}
+
+.service-list article {
+  display: grid; 
+  grid-template-columns: 90px 1fr 300px 30px; 
+  gap: 20px; 
+  align-items: center; 
+  min-height: 120px;
+  border-bottom: 1px solid #ffffff42; 
+  transition: .2s;
+}
+
+.service-list article:hover { 
+  padding-left: 16px; 
+  color: var(--blue); 
+}
+
+.service-list span { 
+  font: 12px "DM Mono"; 
+  color: #ac91ff; 
+}
+
+.service-list h3 { 
+  font: clamp(1.8rem, 3.5vw, 3.7rem) "Playfair Display"; 
+  letter-spacing: -0.06em; 
+  margin: 0; 
+  font-weight: 500; 
+}
+
+.service-list p { 
+  margin: 0; 
+  color: #d8d0ee; 
+  font-size: 15px; 
+  line-height: 1.5; 
+}
+
+.service-list b { 
+  font-size: 28px; 
+  font-weight: 400; 
+}
+
+/* =========================================================
+   Spotlight CTA with Stationary Text & Lens Bubble
+   ========================================================= */
+.spotlight-cta {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: var(--purple, #6d38ee);
+  border-radius: 24px;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  margin-bottom: 74px;
+  cursor: pointer;
+  isolation: isolate;
+  /* Enables container units so mobile text stays centered during bubble float */
+  container-type: size;
+
+  /* CSS offsets for text stabilization */
+  --text-offset-x: 0px;
+  --text-offset-y: 0px;
+}
+
+/* Base Layer (Dark Purple Background) */
+.cta-base {
+  position: absolute;
+  inset: 0;
+  padding: 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+/* Organic Liquid Glass Lens */
+.crystal-bubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 380px;  /* Large bubble size */
+  height: 380px;
+  
+  /* Translucent glass base */
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(245, 240, 255, 0.92) 50%,
+    rgba(220, 235, 255, 0.88) 100%
+  );
+  
+  /* Glassmorphism Refraction & Optics */
+  backdrop-filter: blur(16px) saturate(220%) contrast(110%);
+  -webkit-backdrop-filter: blur(16px) saturate(220%) contrast(110%);
+  
+  /* Organic Non-Definite Shape + Fluid Morphing */
+  border-radius: 54% 46% 42% 58% / 60% 38% 62% 40%;
+  animation: crystalMorph 8s ease-in-out infinite alternate;
+  
+  /* Prismatic Crystalline Refraction Borders */
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.95),
+    inset -12px -12px 25px rgba(85, 184, 255, 0.4),
+    inset 12px 12px 25px rgba(235, 100, 255, 0.4),
+    0 20px 40px rgba(18, 11, 34, 0.25),
+    -10px 0 30px rgba(85, 184, 255, 0.35),
+    10px 0 30px rgba(156, 117, 250, 0.45);
+  
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
+  
+  /* Masking for centered text inside bubble */
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.3);
+  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform, left, top;
+}
+
+/* Reveal Bubble on Hover */
+.spotlight-cta:hover .crystal-bubble {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Glass Reflection Glare */
+.glass-glare {
+  position: absolute;
+  top: 10%;
+  left: 14%;
+  width: 65%;
+  height: 35%;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.05) 80%
+  );
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+
+/* Revealed Text (Stationary - Locked to Card Center via Inverse Offset) */
+.cta-revealed-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + var(--text-offset-x)), calc(-50% + var(--text-offset-y)));
+  text-align: center;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.contact-text {
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  color: var(--ink, #180d36);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-text .arrow {
+  display: inline-block;
+  font-weight: 400;
+  color: var(--purple, #6d38ee);
+  transition: transform 0.25s ease;
+}
+
+.spotlight-cta:hover .arrow {
+  transform: translate(6px, -6px);
+}
+
+/* Fluid Morphing Shape Keyframes */
+@keyframes crystalMorph {
+  0% { border-radius: 54% 46% 42% 58% / 60% 38% 62% 40%; }
+  33% { border-radius: 38% 62% 63% 37% / 41% 58% 42% 59%; }
+  66% { border-radius: 61% 39% 45% 55% / 52% 32% 68% 48%; }
+  100% { border-radius: 46% 54% 58% 42% / 35% 61% 39% 65%; }
+}
+
+/* =========================================================
+   Footer & Contact Card
+   ========================================================= */
+footer { 
+  background: var(--ink); 
+  color: white; 
+  padding: 50px 0; 
+}
+
+.contact-card { 
+  background: var(--purple); 
+  border-radius: 18px; 
+  text-align: center; 
+  padding: clamp(50px, 8vw, 90px) 30px; 
+}
+
+.contact-card p { 
+  font: 12px "DM Mono"; 
+  text-transform: uppercase; 
+  letter-spacing: .08em; 
+  margin: 0 0 16px; 
+}
+
+.contact-card h2 { 
+  font-size: clamp(3.8rem, 7.5vw, 7.8rem); 
+  letter-spacing: -0.1em; 
+  line-height: .78; 
+  margin: 0 0 35px; 
+}
+
+.contact-card a { 
+  font-size: 18px; 
+  border-bottom: 1px solid white; 
+  padding-bottom: 4px; 
+}
+
+.footer-bottom { 
+  display: flex; 
+  justify-content: space-between; 
+  margin-top: 40px; 
+  font-size: 13px; 
+  color: #b6aacb; 
+}
+
+.footer-bottom a { 
+  color: white; 
+}
+
+/* =========================================================
+   Responsive Media Queries (Tablet & Mobile Adaptive)
+   ========================================================= */
+@media (max-width: 900px) {
+  .feature:nth-child(n) { 
+    grid-column: span 12; 
+    flex-direction: column; 
+    max-height: none; 
+  }
+  
+  .feature-content, .feature-media { 
+    width: 100%; 
+  }
+  
+  .feature-media { 
+    padding: 0 28px 28px; 
+    height: 220px; 
+  }
+}
+
+@media (max-width: 700px) {
+  .shell { 
+    width: calc(100% - 32px); 
+  }
+
+  /* Adaptive Navbar for Mobile */
+  .site-header nav { 
+    height: 76px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  .brand-mark {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-links { 
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+  }
+
+  /* Keeps primary nav link button nicely styled in header */
+  .nav-links a {
+    font-size: 13px;
+  }
+
+  .nav-links a:not(:first-child) { 
+    display: none; /* Hide secondary links on mobile */
+  }
+
+  .nav-links a:first-child { 
+    padding: 8px 15px;
+    font-size: 13px;
+    background: transparent;
+    border: 1.5px solid var(--ink);
+  }
+
+  /* Adaptive Hero Section */
+  .hero { 
+    height: auto; 
+    min-height: max(620px, 100vh - 76px); 
+    padding: 40px 0 60px; 
+  }
+
+  .hero h1 { 
+    font-size: clamp(3.2rem, 14.5vw, 5.2rem); 
+    margin: 18px 0 22px; 
+    line-height: 0.85;
+    letter-spacing: -0.07em;
+  }
+
+  .intro { 
+    font-size: 15px; 
+    max-width: 330px; 
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .round-link {
+    width: 76px;
+    height: 76px;
+    font-size: 10px;
+  }
+
+  .round-link span {
+    font-size: 17px;
+  }
+
+  /* Mobile Phone Carousel Track: Single-Screen Focus + Side Peeking */
+  .phone-rail { 
+    display: none;
+    width: 100vw; 
+    top: 36%;
+    perspective: 1000px;
+  }
+
+  .phone { 
+    width: 185px; 
+    height: 370px; 
+    border-radius: 24px; 
+    top: -185px; 
+    margin-left: -92.5px; 
+    animation: mobilePhoneDrift 20s linear infinite;
+  }
+
+  .screen { 
+    padding: 10px; 
+    border-radius: 16px; 
+  }
+
+  .notch { 
+    margin-bottom: 12px; 
+    width: 36px; 
+  }
+
+  .screen h4 { 
+    font-size: 14px; 
+    margin: 4px 0 12px; 
+  }
+
+  /* Mobile Carousel Animation: 1 Centered Phone, Side Phones Peeking */
+  @keyframes mobilePhoneDrift {
+    0% { 
+      transform: translateX(78vw) translateZ(-90px) scale(0.82) rotateY(-18deg); 
+      opacity: 0.55; 
+      filter: blur(1.5px) grayscale(0.8); 
+    }
+    18%, 32% { 
+      transform: translateX(0vw) translateZ(50px) scale(1) rotateY(0deg); 
+      opacity: 1; 
+      filter: blur(0px) grayscale(0); 
+    }
+    50% { 
+      transform: translateX(-78vw) translateZ(-90px) scale(0.82) rotateY(18deg); 
+      opacity: 0.55; 
+      filter: blur(1.5px) grayscale(0.8); 
+    }
+    50.01%, 100% {
+      transform: translateX(-140vw) translateZ(-160px) scale(0.6);
+      opacity: 0;
+      filter: blur(4px) grayscale(1);
+    }
+  }
+
+  /* Section Spacing & Layout Shifts */
+  .section-head, .services-head { 
+    display: block; 
+  }
+
+  .section-head > p, .services-head > p { 
+    margin-top: 20px; 
+    max-width: 100%;
+  }
+
+  .work { 
+    padding: 80px 0; 
+  }
+
+  .more-work { 
+    margin-top: 60px; 
+  }
+/* =========================================================
+   Mobile Other Works Section (.project-row)
+   ========================================================= */
+@media (max-width: 700px) {
+  .project-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 8px;
+  }
+
+  /* Hide project description paragraph on mobile */
+  .project-row p {
+    display: none;
+  }
+
+  /* Index number (01, 02...) on the far left */
+  .project-row span {
+    order: 1;
+    font-size: 12px;
+    margin-right: 2px;
+  }
+
+  /* Site Name */
+  .project-row h3 {
+    order: 2;
+    font-size: 17px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Arrow button placed directly beside site name */
+  .project-row b {
+    order: 3;
+    font-size: 18px;
+    color: var(--purple, #6d38ee);
+    margin-right: auto; /* Pushes the image all the way to the right */
+  }
+
+  /* Image on its own on the right */
+  .project-row img {
+    order: 4;
+    width: 76px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+}
+  .services { 
+    padding-top: 80px; 
+  }
+
+  .service-list article { 
+    grid-template-columns: 38px 1fr 25px; 
+    min-height: 90px; 
+  }
+
+  .service-list p { 
+    display: none; 
+  }
+
+  .spotlight-cta { 
+    height: 160px; 
+    border-radius: 18px;
+    margin-bottom: 50px;
+  }
+
+  .cta-base {
+    padding: 0 22px;
+    font-size: 11px;
+  }
+
+  .crystal-bubble { 
+    width: 270px; 
+    height: 270px; 
+  }
+
+  .contact-text { 
+    font-size: 1.8rem; 
+  }
+
+  .footer-bottom { 
+    gap: 14px; 
+    flex-wrap: wrap; 
+  }
+}
+
+/* =========================================================
+   Spotlight CTA - Mobile Autonomous Floating Bubble Section
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .spotlight-cta { 
+    height: 160px; 
+    border-radius: 18px;
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-base {
+    padding: 0 22px;
+    font-size: 11px;
+  }
+
+  /* 1. Glass Bubble floating across the card */
+  .crystal-bubble { 
+    opacity: 0.95;
+    width: 250px; 
+    height: 250px; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    pointer-events: none;
+    animation: 
+      crystalMorph 8s ease-in-out infinite alternate,
+      mobileFloatBubble 10s ease-in-out infinite alternate;
+  }
+
+  /* 2. Text counter-translated so it stays 100% fixed at Card Center */
+  .cta-revealed-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    pointer-events: none;
+    white-space: nowrap;
+    animation: mobileCounterText 10s ease-in-out infinite alternate;
+  }
+
+  .contact-text { 
+    font-size: 1.8rem; 
+  }
+}
+
+/* =========================================================
+   Synchronized GPU Floating & Counter-Balance Keyframes
+   ========================================================= */
+
+/* Bubble moves around relative to card center (50%, 50%) */
+@keyframes mobileFloatBubble {
+  0% {
+    transform: translate(calc(-50% - 90px), calc(-50% - 15px)) scale(0.95);
+  }
+  25% {
+    transform: translate(calc(-50% + 95px), calc(-50% - 25px)) scale(1.02);
+  }
+  50% {
+    transform: translate(calc(-50% + 70px), calc(-50% + 25px)) scale(0.95);
+  }
+  75% {
+    transform: translate(calc(-50% - 80px), calc(-50% + 20px)) scale(1.02);
+  }
+  100% {
+    transform: translate(calc(-50% - 90px), calc(-50% - 15px)) scale(0.95);
+  }
+}
+
+/* Text applies the exact opposite translation to stay locked to card center */
+@keyframes mobileCounterText {
+  0% {
+    transform: translate(calc(-50% + 90px), calc(-50% + 15px));
+  }
+  25% {
+    transform: translate(calc(-50% - 95px), calc(-50% + 25px));
+  }
+  50% {
+    transform: translate(calc(-50% - 70px), calc(-50% - 25px));
+  }
+  75% {
+    transform: translate(calc(-50% + 80px), calc(-50% - 20px));
+  }
+  100% {
+    transform: translate(calc(-50% + 90px), calc(-50% + 15px));
+  }
+}
