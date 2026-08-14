@@ -5,36 +5,22 @@
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- =========================================================
-       1. Core SEO & Technical Indexing Meta Tags
-       ========================================================= -->
   <title>KomuMech — Crafting Digital Experiences | Web Apps & UI/UX Design</title>
   <meta name="description" content="KomuMech specializes in building responsive, modern, and high-performance web applications with clean UI/UX, Next.js, Vue.js, and AI integrations. Designed & Developed in Lagos.">
   <meta name="keywords" content="KomuMech, Komu, Web Development Lagos, UI/UX Design, Next.js Developer, Vue.js, AI Integration, Komu Search, Komu Notes, Komu Calendar">
   <meta name="author" content="KomuMech Agency">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   
-  <!-- Canonical URL (Prevents duplicate content penalties) -->
   <link rel="canonical" href="https://komumech.com/">
 
-  <!-- Mobile & Web App Theme Accent -->
   <meta name="theme-color" content="#180d36">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-  <!-- =========================================================
-       2. Favicons & Mobile Touch Icons
-       ========================================================= -->
-  <!-- Browser tab icon -->
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="shortcut icon" href="/logo.png">
 
-  <!-- Apple iOS home screen icon -->
   <link rel="apple-touch-icon" href="/logo.png">
 
-  <!-- =========================================================
-       3. Open Graph Metadata (Facebook, WhatsApp, LinkedIn, Discord)
-       ========================================================= -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="KomuMech Agency">
   <meta property="og:url" content="https://komumech.com/">
@@ -42,27 +28,19 @@
   <meta property="og:description" content="Specializing in responsive, high-performance web applications, modern UI/UX design systems, and AI integration.">
   <meta property="og:locale" content="en_US">
 
-  <!-- Absolute image URL required for social platforms -->
   <meta property="og:image" content="https://komumech.com/logo.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="KomuMech Agency Logo & Branding">
 
-  <!-- =========================================================
-       4. Twitter / X Cards
-       ========================================================= -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@KomuMech">
   <meta name="twitter:title" content="KomuMech — Crafting Digital Experiences">
   <meta name="twitter:description" content="High-performance web apps, clean UI/UX, and AI integrations engineered in Lagos.">
   <meta name="twitter:image" content="https://komumech.com/logo.png">
 
-  <!-- =========================================================
-       5. Google JSON-LD Structured Data (Rich Snippets & AI Graphs)
-       ========================================================= -->
 
-  <!-- A. Organization & WebSite Schema (Brand & Search Box) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -106,7 +84,6 @@
   }
   </script>
 
-  <!-- B. FAQPage Schema (Triggers Google's "People Also Ask" Rich Snippets) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -148,7 +125,6 @@
   }
   </script>
 
-  <!-- C. Ecosystem & Portfolio Projects Schema (Software / ItemList) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -245,7 +221,6 @@
     </div>
   </a>
 
-  <!-- Card 02 -->
   <a class="feature feature-blue" href="https://komucalendar.vercel.app/" target="_blank" rel="noreferrer">
     <div class="feature-content">
       <div class="feature-meta"><span>02 / Product</span><span>Visit ↗</span></div>
@@ -259,7 +234,6 @@
     </div>
   </a>
 
-  <!-- Card 03 -->
   <a class="feature feature-lilac" href="https://komu-t8i7.vercel.app/" target="_blank" rel="noreferrer">
     <div class="feature-content">
       <div class="feature-meta"><span>03 / AI tool</span><span>Visit ↗</span></div>
@@ -273,7 +247,6 @@
     </div>
   </a>
 
-  <!-- Card 04 -->
   <a class="feature feature-purple" href="https://komuthemedashboard.vercel.app/" target="_blank" rel="noreferrer">
     <div class="feature-content">
       <div class="feature-meta"><span>04 / Dashboard</span><span>Visit ↗</span></div>
@@ -292,7 +265,9 @@
 
     <section class="services" id="services" aria-labelledby="services-title"><div class="shell">
 <div class="services-head-wrap">
-  <!-- Services Header with Line Break -->
+
+
+
   <div class="services-head">
     <div class="services-title-box">
       <p class="section-label">02 / WHAT I DO</p>
@@ -301,7 +276,9 @@
     <p>I design and develop each experience with the same attention, so the idea stays intact all the way to launch.</p>
   </div>
 
-  <!-- Spotlight CTA Container -->
+
+
+
   <a href="#contact" class="spotlight-cta" id="spotlightCta">
     <!-- Base Layer (Dark Purple) -->
     <div class="cta-base">
@@ -309,11 +286,11 @@
       <span class="cta-hint">Hover to reveal →</span>
     </div>
 
-    <!-- Organic Crystalline Refractive Bubble (Lens) -->
+
+
     <div class="crystal-bubble" id="crystalBubble">
       <div class="glass-glare"></div>
       
-      <!-- Revealed Text locked to Card Center -->
       <div class="cta-revealed-content">
         <span class="contact-text">Contact Us <span class="arrow">↗</span></span>
       </div>
@@ -334,11 +311,9 @@
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       
-      // Move bubble to cursor position
       crystalBubble.style.left = `${x}px`;
       crystalBubble.style.top = `${y}px`;
 
-      // Calculate inverse distance to lock text statically to card center
       const offsetX = (rect.width / 2) - x;
       const offsetY = (rect.height / 2) - y;
       
